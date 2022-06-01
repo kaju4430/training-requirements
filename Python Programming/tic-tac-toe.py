@@ -10,9 +10,15 @@ def ttt():
 
         print("Player " + player + ", make your move : ")
 
+        if not row:
+            try:
+                row = int(float(input("Enter Row : ")))            
+            except:
+                print("Enter a number between 0 & 2")
+                continue
+
         try:
-            row = int(input("Enter Row : "))
-            column = int(input("Enter Column : "))
+            column = int(float(input("Enter Column : ")))
         except:
             print("Enter a number between 0 & 2")
             continue
@@ -23,10 +29,12 @@ def ttt():
                 continue            
             board[row][column] = player
             move_count += 1
-            print(board)
+            for i, j, k in board:
+                print(i, j, k)
 
         else:
             print("Invalid position. Try again.")
+            row = None
             continue
 
         if move_count >= 5:
@@ -38,6 +46,8 @@ def ttt():
         if move_count == 9:
             print("Draw!")
             quit()
+
+        row = None
 
         if player == "X":
             player = "O"
@@ -53,7 +63,7 @@ def check_winner(board, player):
 
     for i, j, k in board:
         if i == j == k == player:
-            print("Player " + player + " wins!")
+            print("Player " + player + " has won!")
             quit()
 
         c1.append(i)
